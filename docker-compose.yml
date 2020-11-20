@@ -2,7 +2,7 @@ version: '3'
 services:
   web:
     build: .
-    container_name: your_container_name
+    container_name: rspec_rails
     command: rails s -b 0.0.0.0
     ports:
       - 3000:3000
@@ -20,6 +20,6 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     volumes:
-      - your_container_name:/var/lib/postgresql/data
+      - rspec_rails:/var/lib/postgresql/data
 volumes:
-  your_container_name:
+  rspec_rails:

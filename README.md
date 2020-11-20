@@ -1,35 +1,24 @@
-# docker-compose-rails
-Initial files to develop a docker rails environment
+# README
 
-# clone this repository
-git clone https://github.com/renanorodrigues/docker-compose-rails.git
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-# build dockerfile
-docker-compose build
+Things you may want to cover:
 
-# create the app rails
-docker-compose run web rails new . --force --database=postgresql
+* Ruby version
 
-# database configuration
-First give the permissions:
-sudo chown -R $USER:$USER .
+* System dependencies
 
-Now update the database config/database.yml
-default: &default
-  adapter: postgresql
-  encoding: unicode
-  host: postgres
-  username: postgres
-  password: mypassword
+* Configuration
 
-# create the database
-Stop the containers:
-docker-compose down
+* Database creation
 
-Create the database:
-docker-compose run web rails db:create
+* Database initialization
 
-# up your application
-docker-compose up -d
+* How to run the test suite
 
-and view in your browser in http://localhost:3000/
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
