@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Enemies", type: :request do
   describe "GET /enemies" do 
     context "When has all enemies created" do 
-      let!(:enemies) {create_list(:enemy, 20)}
+      let!(:enemies) {create_list(:enemy, 5)}
       let(:enemy_attr) {attributes_for(:enemy)}
 
       before(:each) {get enemies_path}
@@ -13,14 +13,11 @@ RSpec.describe "Enemies", type: :request do
       end
 
       it "return total enemies JSON" do 
-        expect(json['tot']).to eq(enemies.count)
+        expect(json.size).to eq(enemies.count)
       end
 
-      xit "return all enemies JSON" do 
-          # expect(json['enemies'][index]).to match(enemy.to_json)
-          enemies.each_with_index do |enemy, index| 
-            expect(json['enemies'][index]).to match(enemy.to_json)
-          end  
+      it "return all enemies JSON" do 
+        expect(json.to_json).to match(enemies.to_json) 
       end
       
     end
@@ -39,21 +36,12 @@ RSpec.describe "Enemies", type: :request do
 
   describe "POST /enemies" do 
     context 'When create an enemy' do 
-      let(:enemy) {create(:enemy)}
-      let(:enemy_attr) {attributes_for(:enemy)}
-
-      it "responds with success" do
+      it "responds with ok" do
         headers = { "ACCEPT" => "application/json" }
-        # post "/widgets", :params => { :widget => {:name => "My Widget"} }, :headers => headers
-        post enemies_path, :params => { :enemy => enemy_attr}, :headers => headers
+        post "/enemies", :params => { :enemy => {:name => "Malvado"}}, :headers => headers
         expect(response.content_type).to eq("application/json; charset=utf-8")
-        expect(response).to have_http_status(:created)
+        expect(response).to have_http_status(:ok)
       end
-      
-      xit "returns messages ok" do
-        expect(response.body).to eq 'ok'  
-      end
-      
     end
   end
 
